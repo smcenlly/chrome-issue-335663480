@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <script>
+      const addEventListenerHandler = (event) => {
+        const error = event && (event.error || event.reason);
+        console.log('addEventListenerHandler', event);
+      };
+      
+      window.addEventListener('error', addEventListenerHandler);
+      window.addEventListener('unhandledrejection', addEventListenerHandler);
+
+      async function NetworkError() {
+        try {
+          const response = await fetch('http://localhost:5001/');
+          console.log(response.status);
+          console.log(await response.json())
+        } catch (e) {
+          throw e;
+        }
+      }
+    </script>  
+  </head>
+  <body>
+    <p><button onclick="NetworkError()">Network Error</button></p>
+  </body>
+</html>
